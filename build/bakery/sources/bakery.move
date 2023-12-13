@@ -254,6 +254,7 @@ module bakery::bakery {
         use sui::test_scenario;
 
         let admin = @0x123;
+        let initial_owner = @0x456;
 
         let scenario_val = test_scenario::begin(admin);
 
@@ -265,7 +266,7 @@ module bakery::bakery {
 
 
         // next test
-        test_scenario::next_tx(scenario, admin);
+        test_scenario::next_tx(scenario, initial_owner);
         {
             
             
