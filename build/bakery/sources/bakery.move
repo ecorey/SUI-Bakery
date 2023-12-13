@@ -257,10 +257,18 @@ module bakery::bakery {
 
         let scenario_val = test_scenario::begin(admin);
 
-
+        // tx1 setting up test environment
         let scenario = &mut scenario_val;
         {
             init(test_scenario::ctx(scenario));
+        };
+
+
+        // next test
+        test_scenario::next_tx(scenario, admin);
+        {
+            
+            
         };
 
 
