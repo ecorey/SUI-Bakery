@@ -31,6 +31,20 @@ module bakery::bakery {
         counter_bread: u64,
     }
 
+    public entry fun delete_counter(counter: Counter) {
+        
+        let Counter {
+             id,
+             counter_flour: _,
+             counter_salt: _,
+             counter_yeast: _,
+             counter_dough: _,
+             counter_bread: _, 
+             } = counter;
+        
+        object::delete(id);
+    }
+
     // FLOUR OBJECT -----------------------------------------
     struct Flour has key , store{
        id: UID,
@@ -270,8 +284,15 @@ module bakery::bakery {
         {
            
             
+            let counter = test_scenario::take_shared<Counter>(scenario);
+
+
+            let flour: Flour = test_scenario::take_from_sender(scenario);
+
             
-            
+            delete_counter(counter);
+            delete_flour(flour);
+
         };
 
 
