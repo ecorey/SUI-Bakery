@@ -31,6 +31,20 @@ module bakery::bakery {
         counter_bread: u64,
     }
 
+    public entry fun delete_counter(counter: Counter) {
+        
+        let Counter {
+             id,
+             counter_flour: _,
+             counter_salt: _,
+             counter_yeast: _,
+             counter_dough: _,
+             counter_bread: _, 
+             } = counter;
+        
+        object::delete(id);
+    }
+
     // FLOUR OBJECT -----------------------------------------
     struct Flour has key , store{
        id: UID,
@@ -239,6 +253,11 @@ module bakery::bakery {
         object::delete(id);
     }
 
+    
+
+
+
+
 
     
    // ----------------------------------------------------
@@ -249,34 +268,35 @@ module bakery::bakery {
     
 
     #[test]
-     public fun test_bakery() {
-
+    public fun test_bakery() {
         use sui::test_scenario;
 
         let admin = @0x123;
         let initial_owner = @0x456;
 
         let scenario_val = test_scenario::begin(admin);
+        let scenario = &mut scenario_val;
 
         // tx1 setting up test environment
-        let scenario = &mut scenario_val;
         {
             init(test_scenario::ctx(scenario));
         };
 
-
         // next test
         test_scenario::next_tx(scenario, initial_owner);
         {
+            let counter = test_scenario::take_shared<Counter>(scenario);
             
             
+            create_flour(&mut counter, test_scenario::ctx(scenario)); 
+            let flour: Flour = test_scenario::take_from_sender(scenario); 
+            delete_flour(flour); 
+
+            delete_counter(counter);
+
         };
 
-
-
-
         test_scenario::end(scenario_val);
-
     }
 
 }

@@ -253,6 +253,11 @@ module bakery::bakery {
         object::delete(id);
     }
 
+    
+
+
+
+
 
     
    // ----------------------------------------------------
@@ -263,43 +268,35 @@ module bakery::bakery {
     
 
     #[test]
-     public fun test_bakery() {
-
+    public fun test_bakery() {
         use sui::test_scenario;
 
         let admin = @0x123;
         let initial_owner = @0x456;
 
         let scenario_val = test_scenario::begin(admin);
+        let scenario = &mut scenario_val;
 
         // tx1 setting up test environment
-        let scenario = &mut scenario_val;
         {
             init(test_scenario::ctx(scenario));
         };
 
-
         // next test
         test_scenario::next_tx(scenario, initial_owner);
         {
-           
-            
             let counter = test_scenario::take_shared<Counter>(scenario);
-
-
-            let flour: Flour = test_scenario::take_from_sender(scenario);
-
             
+            
+            create_flour(&mut counter, test_scenario::ctx(scenario)); 
+            let flour: Flour = test_scenario::take_from_sender(scenario); 
+            delete_flour(flour); 
+
             delete_counter(counter);
-            delete_flour(flour);
 
         };
 
-
-
-
         test_scenario::end(scenario_val);
-
     }
 
 }

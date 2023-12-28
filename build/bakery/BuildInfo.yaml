@@ -5,14 +5,14 @@ compiled_package_info:
     bakery: "0000000000000000000000000000000000000000000000000000000000000000"
     std: "0000000000000000000000000000000000000000000000000000000000000001"
     sui: "0000000000000000000000000000000000000000000000000000000000000002"
-  source_digest: C2D3F6FAD27AD21652933BD0260E868468A02EC17BD0F4E97CD7CCA1C8ACDB9B
+  source_digest: E371BCE51D5D3BC3E6CE7BA8A71C1CA96C6ABDE1F4584D3294E9A5D23B8F7586
   build_flags:
-    dev_mode: true
-    test_mode: true
+    dev_mode: false
+    test_mode: false
     generate_docs: false
     install_dir: ~
     force_recompilation: false
-    lock_file: ~
+    lock_file: "./Move.lock"
     fetch_deps_only: false
     skip_fetch_latest_git_deps: false
     default_flavor: sui
