@@ -194,9 +194,7 @@ module bakery::bakery {
     
      fun new_dough( ctx: &mut TxContext): Dough {
         Dough {
-          
           id: object::new(ctx),
-            
         }
     }
 
