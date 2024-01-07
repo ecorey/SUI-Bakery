@@ -46,7 +46,7 @@ module bakery::bakery {
     }
 
     // FLOUR OBJECT -----------------------------------------
-    struct Flour has key , store{
+    struct Flour has key, store{
        id: UID,
         
     }
